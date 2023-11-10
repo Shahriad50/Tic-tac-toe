@@ -82,7 +82,7 @@
     font-weight: bolder;
 }
 .line{
-    background-color: black;
+    background-color: rgb(195, 4, 4);
     width:0vw;
     position: absolute;
     height:3px;
@@ -91,7 +91,7 @@
 }
 
     
-@media screen and (max-width:950px){
+@media only screen and (max-width:600px){
     .gameContainer{
         flex-wrap: wrap;
 
@@ -106,5 +106,13 @@
     .container{
         grid-template-columns: repeat(3,20vw);
         grid-template-rows: repeat(3,20vw);
+    }
+    .line{
+        transform:translate(5vw,26vw) rotate(45deg);
+        background-color: rgb(195, 4, 4);
+        width:0vw;
+        position: absolute;
+        height:3px;
+        transition: width 1s ease-in-out;
     }
 }

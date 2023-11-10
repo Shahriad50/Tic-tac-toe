@@ -27,10 +27,18 @@ const checkWin=()=>{
         if((boxtext[e[0]].innerText===boxtext[e[1]].innerText) && (boxtext[e[2]].innerText===boxtext[e[1]].innerText) && boxtext[e[0]].innerText!==""){
             document.querySelector(".info").innerText=boxtext[e[0]].innerText+" won";
             isgameover=true;
-            camMusic.play();
+            gameover.play();
             document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width="200px";
-            document.querySelector(".line").style.transform=`translate(${e[3]}vw,${e[4]}vw) rotate(${e[5]}deg)`
-            document.querySelector(".line").style.width="20vw";
+            const lineElement = document.querySelector(".line");
+
+            // Adjust styles based on screen size
+            if (window.innerWidth <= 600) {
+              lineElement.style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`;
+              lineElement.style.width = "43.5vw"; // Adjusted width for smaller screens
+            } else {
+              lineElement.style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`;
+              lineElement.style.width = "22.5vw"; // Default width for larger screens
+            }
         }
     })
 }
@@ -42,7 +50,7 @@ Array.from(boxes).forEach(element=>{
         if(boxtext.innerText===''){
             boxtext.innerText=turn;
            turn= changeTurn();
-             audioturn.play();
+            audioturn.play();
             checkWin();
             if(!isgameover){
             document.getElementsByClassName("info")[0].innerText="Turn For "+turn;
@@ -50,7 +58,7 @@ Array.from(boxes).forEach(element=>{
         }
     })
 })
-// Add onclick listener to reset bitton
+// Add onclick listener to reset button
 reset.addEventListener('click',()=>{
     let boxtexts=document.querySelectorAll('.boxtext');
    Array.from(boxtexts).forEach(element=>{
@@ -58,8 +66,8 @@ reset.addEventListener('click',()=>{
    });
         turn="X";
         isgameover=false;
-        // camMusic.pause();
-        // camMusic.currentTime()=0;
+       // camMusic.pause();
+        //camMusic.currentTime()=0;
         document.getElementsByClassName("info")[0].innerText="Turn For "+turn;
         document.querySelector(".imgbox").getElementsByTagName('img')[0].style.width="0px";
         document.querySelector(".line").style.width="0vw";
